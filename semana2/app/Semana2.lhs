@@ -237,7 +237,7 @@ Além disso, apresente uma propriedade de correção para sua implementação de
 
 2. Implemente a função
 
-> centsToReals :: [Int] -> Float
+> centsToReals :: [Int] -> [Float]
 > centsToReals = tODO
 
 que converte cada preço em centavos para o equivalente em reais. Sua implementação
@@ -284,6 +284,57 @@ Adicionalmente, apresente uma propriedade de correção para sua implementação
 
 > propAboveCorrect :: Int -> [Int] -> Bool
 > propAboveCorrect = tODO
+
+5. Neste exercício você deverá re-implementar a função `takeWhile`, utilizando
+a função `foldr` de listas. A função `takeWhile` é implementada como:
+
+~~~~~~{.haskell}
+takeWhile :: (a -> Bool) -> [a] -> [a]
+takeWhile p [] = []
+takeWhile p (x : xs)
+    | p x = x : takeWhile p xs
+    | otherwise = []
+~~~~~~~
+
+> takeWhile' :: (a -> Bool) -> [a] -> [a]
+> takeWhile' p
+>    = foldr step base
+>      where
+>        step = tODO
+>        base = tODO
+
+Evidentemente sua implementação deverá atender a seguinte propriedade de correção:
+
+> propTakeWhile' :: [Int] -> Bool
+> propTakeWhile' xs
+>     = takeWhile (> 5) xs == takeWhile' (> 5) xs
+
+6. Neste exercício você deverá re-implementar a função `dropWhile`, utilizando
+a função `foldr` de listas. A função `dropWhile` é implementada como:
+
+~~~~~{.haskell}
+dropWhile :: (a -> Bool) -> [a] -> [a]
+dropWhile p [] = []
+dropWhile p (x : xs)
+  | p x = dropWhile p xs
+  | otherwise = x : xs
+~~~~~~
+
+> dropWhile' :: (a -> Bool) -> [a] -> [a]
+> dropWhile' p
+>    = foldr step base
+>      where
+>        step = tODO
+>        base = tODO
+
+
+
+Evidentemente sua implementação deverá atender a seguinte propriedade de correção:
+
+> propDropWhile' :: [Int] -> Bool
+> propDropWhile' xs
+>     = dropWhile (> 5) xs == dropWhile' (> 5) xs
+
 
 Funções auxiliares 
 ------------------
@@ -357,5 +408,9 @@ Funções auxiliares
 >                   countPositivesGroup,
 >                   toTitleStringGroup,
 >                   halfEvensGroup,
->                   centsToRealsTest
+>                   centsToRealsTest,
+>                   alphasGroup,
+>                   aboveGroup,
+>                   QC.testProperty "takeWhile' correct" propTakeWhile',
+>                   QC.testProperty "dropWhile' correct" propDropWhile'
 >                 ]
