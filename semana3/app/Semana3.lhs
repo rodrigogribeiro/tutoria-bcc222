@@ -105,7 +105,7 @@ a seguir:
 > uniform :: [Float] -> Bool
 > uniform = tODO
 
-         Os seguintes casos de teste devem ser satisfeitos por sua implementação de `uniform`.
+Os seguintes casos de teste devem ser satisfeitos por sua implementação de `uniform`.
 
 > uniformTests :: TestTree
 > uniformTests
@@ -122,7 +122,7 @@ a seguir:
 > valid :: Matrix -> Bool
 > valid = tODO
 
-     que testa de uma matriz é válida ou não. Sua função deve passar nos seguintes casos de teste.
+que testa de uma matriz é válida ou não. Sua função deve passar nos seguintes casos de teste.
 
 > validTests :: TestTree
 > validTests

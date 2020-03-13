@@ -27,7 +27,7 @@ chamadas para a função
 
 que interompe a execução do programa com uma
 mensagem de erro, por código que implementa
-as funcionalidades requerida por cada exercício.
+as funcionalidades requeridas por cada exercício.
 
 A seguinte função `main` é usada apenas para omitir
 mensagens de erro do compilador de Haskell.
