@@ -183,12 +183,17 @@ sua implementação de `numberWords`.
 > numberAll :: [(Int, Line)] -> [(Int, Word)]
 > numberAll = tODO
 
+que associa a todos palavras de um texto o seu respectivo número de linha.
+
 Sua implementação de `numberAll` deve satisfazer os seguintes casos de teste.
 
 > numberAllTests :: TestTree
 > numberAllTests
 >   = testGroup "Tests for numberAll"
 >               [
+>                 testCase "numberAll empty"  $ numberAll []                            @?= []
+>               , testCase "numberAll single" $ numberAll [(1, "ab cd ef")]             @?= [(1, "ab"), (1, "cd"), (1,"ef")] 
+>               , testCase "numberAll many"   $ numberAll [(1, "ab cd"),  (2, "ef gh")] @?= [(1, "ab"), (1,"cd"), (2, "ef"), (2, "gh")]
 >               ]
 
 
@@ -308,6 +313,7 @@ Funções auxiliares
 >                   lineTests,
 >                   numberLinesTests,
 >                   numberWordsTests,
+>                   numberAllTests,
 >                   sortEntriesTests,
 >                   combineTests,
 >                   QC.testProperty "Sorted property" sortedProperty,
