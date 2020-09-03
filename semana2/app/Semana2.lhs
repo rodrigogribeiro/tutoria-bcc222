@@ -409,6 +409,7 @@ Funções auxiliares
 >                   toTitleStringGroup,
 >                   halfEvensGroup,
 >                   centsToRealsTest,
+>                   uppersGroup,
 >                   alphasGroup,
 >                   aboveGroup,
 >                   QC.testProperty "takeWhile' correct" propTakeWhile',
