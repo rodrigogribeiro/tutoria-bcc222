@@ -126,7 +126,7 @@ apresentam a solução passo a passo deste problema.
 das linhas que o formam.
 
 > lines :: Text -> [Line]
-> lines = tODO
+> lines = undefined
 
 Os seguintes casos de teste devem ser satisfeitos por sua implementação de `lines`.
 
