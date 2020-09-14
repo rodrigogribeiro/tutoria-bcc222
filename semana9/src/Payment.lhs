@@ -1,9 +1,13 @@
 
 ---
 author: Programação Funcional
-title: Exercícios para tutoria. Semana 5.
+title: Exercícios para tutoria. Semana 9.
 date: Prof. Rodrigo Ribeiro
 ---
+
+\begin{code}
+module Payment where
+\end{code}
 
 Modelando uma folha de pagamento
 ================================

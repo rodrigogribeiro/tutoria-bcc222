@@ -34,7 +34,9 @@ table = [(Black,  [Just 0.0, Just 0.0, Just 0.0]),
 value :: Color -> Int -> Maybe Float
 value = undefined
 
-data Resistor = Resistor [Color] deriving (Eq, Ord)
+newtype Resistor
+  = Resistor [Color]
+  deriving (Eq, Ord)
 
 -- exercise 2.
 
