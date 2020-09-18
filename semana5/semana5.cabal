@@ -26,7 +26,6 @@ source-repository head
 library
   exposed-modules:
       Lib
-      Payment
       Semana5
   other-modules:
       Paths_semana5
