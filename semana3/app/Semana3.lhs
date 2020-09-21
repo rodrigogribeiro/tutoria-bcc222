@@ -394,7 +394,8 @@ Funções auxiliares
 > question5Tests
 >   = testGroup "Tests for exercice 5"
 >               [
->                 sumMatrixTest
+>                 addRowTest
+>               , sumMatrixTest
 >               ] 
 
 > question6Tests :: TestTree
