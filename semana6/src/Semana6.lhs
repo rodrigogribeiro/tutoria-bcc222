@@ -18,6 +18,7 @@ para uma máquina virtual simples, que chamaremos de _Small_.
 As próximas seções apresentam a sintaxe e a semântica de
 programas Small.
 
+
 Sintaxe e semântica de programas Small
 --------------------------
 
@@ -26,6 +27,8 @@ uma memória e um contador de instruções. O estado da máquina pode ser
 representado pelo seguinte tipo de dados.
 
 \begin{code}
+module Semana6 where
+
 newtype Name
   = Name String
     deriving (Eq, Ord, Show)
