@@ -1,16 +1,10 @@
----
-author: Programação Funcional
-title: Exercícios para tutoria. Semana 7.
-date: Prof. Rodrigo Ribeiro
----
+module Semana7 where
+
+
+{-
 
 Modelando um SGDB
 ==================
-
-Setup
------
-
-> module Semana7 where
 
 
 Introdução
@@ -23,14 +17,16 @@ em um sistema gerenciador de banco de dados.
 Para isso, representaremos tabelas usando o tipo de
 dados `Table`
 
-> data Table
->   = Table {
->       tableName   :: String,        -- nome da tabela
->       tableFields :: [Field],       -- campos
->       values :: [[String]]          -- valores associados a cada campo
->     } deriving (Eq, Ord)
+-}
 
+data Table
+   = Table {
+       tableName   :: String,        -- nome da tabela
+       tableFields :: [Field],       -- campos
+       values :: [[String]]          -- valores associados a cada campo
+     } deriving (Eq, Ord)
 
+{-
 Um valor do tipo `Table` é formado por três componentes, em que o primeiro
 componente é o nome da tabela, o segundo é a lista dos campos da tabela
 e o terceiro é a lista das linhas da tabela, sendo cada linha
@@ -43,92 +39,101 @@ que é formado pelo nome do campo e seu respectivo tipo. Tipos de dados são
 representados pelo tipo `Type` e especificam os tipos de dados mais comuns
 presentes em bancos de dados relacionais. Os tipos `Field` e `Type` são
 apresentados a seguir:
+-}
 
-> data Field
->   = Field  {
->       fieldName :: String,     -- nome do campo
->       fieldType :: Type        -- tipo de dados associado com este campo
->     } deriving (Eq, Ord, Show)
+data Field
+   = Field  {
+       fieldName :: String,     -- nome do campo
+       fieldType :: Type        -- tipo de dados associado com este campo
+     } deriving (Eq, Ord, Show)
 
-> data Type = TyInt                -- números inteiros
->          | TyDouble              -- números de ponto flutuante
->          | TyBool                -- valores lógicos
->          | TyVarChar (Maybe Int) -- Strings.Pode especificar o comp. máx. n
->                                  -- por Just n. Nothing => 255
->          | TyDate                -- Datas
->          | TyCurrency            -- valores monetários
->          deriving (Eq, Ord)
+data Type = TyInt                -- números inteiros
+          | TyDouble              -- números de ponto flutuante
+          | TyBool                -- valores lógicos
+          | TyVarChar (Maybe Int) -- Strings.Pode especificar o comp. máx. n
+                                  -- por Just n. Nothing => 255
+          | TyDate                -- Datas
+          | TyCurrency            -- valores monetários
+          deriving (Eq, Ord)
 
-
+{-
 Para exemplificar a representação a ser utilizada neste trabalho, considere o
 trecho de código a seguir, onde é mostrada uma tabela de exemplo:
+-}
 
-> client :: Table
-> client = Table "Cliente" fieldsCliente dataCliente
+client :: Table
+client = Table "Cliente" fieldsCliente dataCliente
 
-> fieldsCliente :: [Field]
-> fieldsCliente
->    = [ Field "id" TyInt
->      , Field "nome" (TyVarChar (Just 15))
->      , Field "cpf" (TyVarChar (Just 11))]
+fieldsCliente :: [Field]
+fieldsCliente
+    = [ Field "id" TyInt
+      , Field "nome" (TyVarChar (Just 15))
+      , Field "cpf" (TyVarChar (Just 11))]
 
-> dataCliente :: [[String]]
-> dataCliente
->    = [ ["1", "Jose da Silva", "23333245678"]
->      , ["2", "Joaquim Souza", "09863737213"]
->      , ["3", "Roberto Martins", "45627819081"]
->      ]
+dataCliente :: [[String]]
+dataCliente
+    = [ ["1", "Jose da Silva", "23333245678"]
+      , ["2", "Joaquim Souza", "09863737213"]
+      , ["3", "Roberto Martins", "45627819081"]
+      ]
 
+{-
 Observe que os valores `fieldsCliente` e `dataCliente` são utilizados
 apenas para criar a lista de campos e dos valores associados com a
 tabela criada.
 
 Outro exemplo de tabelas é apresentado a seguir.
+-}
 
-> address :: Table
-> address
->    = Table "Endereco"
->            fieldsEndereco
->            dataEndereco
+address :: Table
+address
+    = Table "Endereco"
+            fieldsEndereco
+            dataEndereco
 
-> fieldsEndereco :: [Field]
-> fieldsEndereco = [ Field "cpf" (TyVarChar (Just 11))
->                  , Field "rua" (TyVarChar (Just 15))
->                  , Field "bairro" (TyVarChar (Just 15))
->                  , Field "cidade" (TyVarChar (Just 15))
->                  , Field "estado" (TyVarChar (Just 2))
->                  ]
+fieldsEndereco :: [Field]
+fieldsEndereco = [ Field "cpf" (TyVarChar (Just 11))
+                  , Field "rua" (TyVarChar (Just 15))
+                  , Field "bairro" (TyVarChar (Just 15))
+                  , Field "cidade" (TyVarChar (Just 15))
+                  , Field "estado" (TyVarChar (Just 2))
+                  ]
 
-> dataEndereco :: [[String]]
-> dataEndereco = [ ["23333245678", "rua 2", "alfa", "jurema do sul", "SC"]
->                , ["09863737213", "rua 89", "beta", "jurema do norte", "SC"]
->                , ["45627819081", "rua 10", "gama", "jurema do leste", "SC"]
->                ]
+dataEndereco :: [[String]]
+dataEndereco = [ ["23333245678", "rua 2", "alfa", "jurema do sul", "SC"]
+               , ["09863737213", "rua 89", "beta", "jurema do norte", "SC"]
+               , ["45627819081", "rua 10", "gama", "jurema do leste", "SC"]
+               ]
 
+{-
 Com base no apresentado, resolva as questões propostas a seguir.
 
 Exercício 1. Um esquema de uma tabela de um banco de dados relacional
 é um produto dos tipos de cada uma das tabelas de um banco de dados.
 Considere o seguinte tipo de dados que representa um esquema de uma
 tabela de um banco de dados relacional:
+-}
 
-> infixr 5 :*:
+infixr 5 :*:
 
-> data Schema = Type :*: Schema
->             | Nil
->             deriving (Eq, Ord)
+data Schema = Type :*: Schema
+            | Nil
+            deriving (Eq, Ord)
 
+{-
 Onde o construtor de dados `:*:` representa o produto do tipo de um
 campo de uma tabela e o esquema que representa o restante da tabela.
 Como exemplo, o esquema que representa a tabela cliente mostrada
 anteriormente é:
+-}
 
-> esquemaCliente :: Schema
-> esquemaCliente
->    = TyInt               :*:
->      TyVarChar (Just 15) :*:
->      TyVarChar (Just 11) :*: Nil
+esquemaCliente :: Schema
+esquemaCliente
+    = TyInt               :*:
+      TyVarChar (Just 15) :*:
+      TyVarChar (Just 11) :*: Nil
 
+{-
 O construtor de dados `Nil` é utilizado apenas como um marcador de
 fim do produto do esquema de uma tabela.
 
@@ -163,22 +168,28 @@ Observe que o construtor de dados `Nil` é substituído pela string vazia.
 a) Desenvolva uma instância de `Show` para o tipo `Type` que reflita a
 conversão de valores deste tipo em strings de acordo com a tabela
 apresentada anteriormente.
+-}
 
-> instance Show Type where
->   show = undefined
+instance Show Type where
+  show = undefined
 
+{-
 b) Desenvolva uma instância para `Show` para o tipo `Schema` que permita
 imprimir esquemas de tabelas de maneira similar ao exemplo apresentado
 anteriormente para a tabela cliente.
+-}
 
-> instance Show Schema where
->  show = undefined
+instance Show Schema where
+  show = undefined
 
+{-
 c) Implemente a função
+-}
 
-> schema :: Table -> Schema
-> schema = undefined
+schema :: Table -> Schema
+schema = undefined
 
+{-
 que dada uma tabela, representada pelo tipo de dados `Table`, retorne o seu
 esquema correspondente.
 
@@ -194,26 +205,34 @@ id nome            cpf
 2  Joaquim Souza   09863737213
 3  Roberto Martins 45627819081
 ````
-> instance Show Table where
->   show = undefined
+-}
 
+instance Show Table where
+  show = undefined
+
+
+{-
 Exercício 2. Defina a função
+-}
 
-> count :: Table -> Int
-> count = undefined
+count :: Table -> Int
+count = undefined
 
+{-
 que retorna o número de registros presentes em uma tabela.
 
 Exercício 3. Defina a função
+-}
 
-> project :: Table -> [String] -> Either String Table
-> project = undefined
 
+project :: Table -> [String] -> Either String Table
+project = undefined
+
+{-
 que receba como argumento uma tabela e uma lista de nomes de campos
 desta tabela e retorne como resultado uma nova tabela que contenha
 somente as informações presentes nas colunas especificadas pelo
 segundo argumento. Como exemplo, se executarmos
-
 ```haskell
 project client ["id","nome"]
 ````
@@ -252,32 +271,37 @@ em que  `Left` é o construtor de dados do tipo `Either`
 que é utilizado para representar erros.
 
 Exercício 4. Implemente a função
+-}
 
-> restrict :: Table -> Condition -> Either String Table
-> restrict t c = undefined
+restrict :: Table -> Condition -> Either String Table
+restrict t c = undefined
 
+{-
 Que seleciona todos os registros de uma tabela que atendem
 a uma determinada condição. Condições são representadas
 pelo tipo `Condition`, apresentado a seguir:
+-}
 
 
-> data Condition
->   = Condition {
->       field     :: String
->     , condition :: String -> Bool
->     }
+data Condition
+   = Condition {
+       field     :: String
+     , condition :: String -> Bool
+     }
 
-
+{-
 em que `field` representa o nome do campo que será utilizado
 no processo de seleção de registros e `condition` é uma função
 que verifica se um valor deste campo atende ou não a condição
 especificada. Como exemplo, considere o seguinte valor do
 tipo `Condition`, que representa a condição: Selecione todos os
 nomes que começam com a letra R:
+-}
 
-> cond :: Condition
-> cond = Condition "nome" (\s -> head s == 'R')
+cond :: Condition
+cond = Condition "nome" (\s -> head s == 'R')
 
+{-
 Ao executarmos
 
 ````haskell
@@ -376,26 +400,33 @@ A operação de junção pode ser decomposta em dois passos:
 Considerando o apresentado, faça:
 
 a) Implemente a função
+-}
 
-> cartProd :: Table -> Table -> Either String Table
-> cartProd = undefined
+cartProd :: Table -> Table -> Either String Table
+cartProd = undefined
 
+{-
 que calcula o produto cartesiano de duas tabelas conforme descrito acima.
 Esta função deve retornar uma mensagem de erro, caso as duas tabelas
 fornecidas como parâmetro não possuam um campo em comum.
 
 
 b) Implemente a função
+-}
 
-> restrictProd :: Table -> Either String Table
-> restrictProd = undefined
+restrictProd :: Table -> Either String Table
+restrictProd = undefined
 
+{-
 que seleciona os registros adequados do produto cartesiano,
 conforme descrito acima.
 
 c) De posse das funções anteriores, implemente a função
+-}
 
-> join :: Table -> Table -> Either String Table
-> join t1 t2 = undefined
+join :: Table -> Table -> Either String Table
+join t1 t2 = undefined
 
+{-
 que realiza a junção de duas tabelas como explicado.
+-}
