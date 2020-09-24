@@ -146,3 +146,24 @@ instance Modify Dept where
 instance Modify Company where
   modify = undefined
 \end{code}
+
+A seguir, alguns dados de teste para seu código
+
+\begin{code}
+company :: Company
+company
+  = Company [ Dept "Research" ralf [joost, marlow]
+            , Dept "Strategy" blair []]
+
+ralf :: Employee
+ralf = Employee (Person "Ralf" "USA") (Salary 1000.0)
+
+joost :: Employee
+joost = Employee (Person "Joost" "Norway") (Salary 200.0)
+
+marlow :: Employee
+marlow = Employee (Person "Marlow" "Brazil") (Salary 500.0)
+
+blair :: Employee
+blair = Employee (Person "Blair" "France") (Salary 600.0)
+\end{code}
