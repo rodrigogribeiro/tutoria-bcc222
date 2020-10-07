@@ -153,6 +153,12 @@ a seguinte string deve ser produzida:
 Por sua vez, para o tipo Instr, você deverá produzir strings
 correspondentes aos mnemônicos de cada instrução.
 
+> instance Show Instr where
+>    show = undefined
+
+> instance Show Robot where
+>    show = undefined
+
 2. Implemente um parser para a gramática de programas para o robô.
 Seu parser deve retornar como resultado um valor do tipo de dados
 Program.

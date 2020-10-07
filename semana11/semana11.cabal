@@ -26,6 +26,7 @@ source-repository head
 library
   exposed-modules:
       Lib
+      Parser
       Semana11
   other-modules:
       Paths_semana11
